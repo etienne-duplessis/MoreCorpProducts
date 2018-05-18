@@ -7,12 +7,41 @@
 
 require('./bootstrap');
 
-// const feather = require('feather-icons');
+(function(){
 
-// alert('Hello');
+    /**
+     * THE MAIN SCRIPT CONSTRUCTOR
+     */
 
-/**
- * Load feather icons
- */
+    function scriptConstructor(){
+        console.log('DOM is ready');
 
-feather.replace();
+        /**
+         * Load feather icons
+         */
+
+        feather.replace();
+
+        /**
+         * Fade out alert after a couple of seconds
+         */
+
+        setTimeout(function() {
+            $('#flash-message').fadeOut('slow');
+        }, 8000 );
+    }
+
+    $(window).ready(scriptConstructor);
+
+    /**
+     * THE CODE TO LOAD ONLY WHEN PAGE HAS FULLY LOADED
+     */
+
+    var interval = setInterval(function() {
+        'use strict';
+        if(document.readyState === 'complete') {
+            clearInterval(interval);
+            console.log('Page has finished loading');
+        }
+    }, 100);
+})();

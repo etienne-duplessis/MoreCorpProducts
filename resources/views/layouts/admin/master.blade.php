@@ -7,7 +7,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Blog Template for Bootstrap</title>
+    <title>MoreCorp Products: Admin Dashboard</title>
 
     <!-- Bootstrap core CSS -->
     {{--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">--}}
@@ -23,14 +23,6 @@
 <body class="admin">
 
 @include ('layouts.admin.nav')
-
-@if ($flash = session('message'))
-
-    <div id="flash-message" class="alert alert-success" role="alert">
-        {{ $flash }}
-    </div>
-
-@endif
 
 <div class="container-fluid">
     <div class="row">

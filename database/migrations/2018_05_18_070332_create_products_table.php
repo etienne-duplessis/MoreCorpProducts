@@ -26,7 +26,7 @@ class CreateProductsTable extends Migration
 
             $table->string('name', 100);
             $table->string('sku', 6);
-            $table->string('price', 20);
+            $table->integer('price');
             $table->string('description', 200);
         });
     }

@@ -32,7 +32,7 @@ class ProductRequest extends FormRequest
         return [
             'name' => 'required|min:2|max:100',
             'sku' => 'required|min:6|max:6',
-            'price' => 'required|max:20',
+            'price' => 'required|integer',
             'description' => 'required|max:200'
             //
         ];

@@ -1,0 +1,20 @@
+body.admin{
+  .fixed-nav{
+    nav.navbar{
+      @media (max-width: 768px)
+      {
+        position:relative;
+      }
+      .navbar-brand{
+
+      }
+      .navbar-nav{
+        @media (max-width: 768px)
+        {
+          display:block;
+          width:100%;
+        }
+      }
+    }
+  }
+}
