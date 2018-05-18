@@ -1,0 +1,8 @@
+body.admin{
+  nav.navbar{
+    @media (max-width: $screen-sm)
+    {
+      display:none;
+    }
+  }
+}

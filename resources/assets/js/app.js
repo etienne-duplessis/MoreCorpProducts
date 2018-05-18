@@ -7,4 +7,12 @@
 
 require('./bootstrap');
 
+// const feather = require('feather-icons');
+
 // alert('Hello');
+
+/**
+ * Load feather icons
+ */
+
+feather.replace();

@@ -1,4 +1,4 @@
-@extends ('layouts.master')
+@extends ('layouts.admin.master')
 
 @section('content')
 
@@ -31,7 +31,7 @@
                 <button type="submit" class="btn btn-primary">Publish</button>
             </div>
 
-            @include('layouts.errors')
+            @include('layouts.admin.errors')
         </form>
 
 
