@@ -9,6 +9,15 @@ use Illuminate\Http\Request;
 class ProductsController extends Controller
 {
     /**
+     * Create a new articles controller instance.
+     * ArticlesController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

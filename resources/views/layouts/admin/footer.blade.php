@@ -6,5 +6,5 @@
 {{--</footer>--}}
 
 <!-- Scripts -->
-<script src="js/feather.min.js"></script>
+<script src="/js/feather.min.js"></script>
 <script src="{{ asset('js/app.js') }}" defer></script>

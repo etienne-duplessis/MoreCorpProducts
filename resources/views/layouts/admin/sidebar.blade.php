@@ -2,7 +2,7 @@
     <div class="">
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link active" href="/products">
+                <a class="nav-link" href="/products">
                     <i data-feather="file-text"></i>
                     Products List <span class="sr-only">(current)</span>
                 </a>
