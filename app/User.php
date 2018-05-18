@@ -32,8 +32,28 @@ class User extends Authenticatable
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function articles()
+    public function products()
     {
         return $this->hasMany('App\Product');
+    }
+
+    /**
+     * A user can have one bid
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function bids()
+    {
+        return $this->hasOne('App\Bid');
+    }
+
+    /**
+     * A function to make publishing products easier. Uses the relationship
+     *
+     */
+
+    public function publishProduct(Product $product)
+    {
+        $this->products()->save($product);
     }
 }

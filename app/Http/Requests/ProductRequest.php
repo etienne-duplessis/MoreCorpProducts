@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ProductRequest extends FormRequest
@@ -13,7 +14,12 @@ class ProductRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        if(!Gate::allows('isAdmin')){
+            return false;
+        }
+        else{
+            return true;
+        }
     }
 
     /**
@@ -24,6 +30,10 @@ class ProductRequest extends FormRequest
     public function rules()
     {
         return [
+            'name' => 'required|min:2|max:100',
+            'sku' => 'required|min:6|max:6',
+            'price' => 'required|max:20',
+            'description' => 'required|max:200'
             //
         ];
     }
