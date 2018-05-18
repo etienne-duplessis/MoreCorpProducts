@@ -37,9 +37,6 @@ require('./bootstrap');
         var url = window.location.pathname;
         // alert(url);
         $('ul.nav a[href="'+ url +'"]').addClass('active');
-        // $('ul.nav a').filter(function() {
-        //     return this.href == url;
-        // }).addClass('active');
     }
 
     $(window).ready(scriptConstructor);

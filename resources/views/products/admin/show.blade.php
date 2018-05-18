@@ -2,77 +2,18 @@
 
 @section('content')
 
-    <div class="col-sm-8 blog-main">
+    <article>
+        <h1><a href="{{ url('/admin', $product->id) }}">{{$product->name}}</a></h1>
 
-        <h1>{{$post->title}}</h1>
-
-        @if (count($post->tags))
-
-            <ul>
-
-                @foreach ($post->tags as $tag)
-
-                    <li>
-                        <a href="/posts/tags/{{$tag->name}}">
-
-                            {{$tag->name}}
-
-                        </a>
-                    </li>
-
-                @endforeach
-
-            </ul>
-
-        @endif
-
-        {{$post->body}}
-
-        <hr>
-
-        <div class="comments">
-
-            <ul class="list-group">
-
-                @foreach ($post->comments as $comment)
-
-                    <li class="list-group-item">
-
-                        <strong>{{$comment->created_at->diffForHumans()}}:&nbsp;</strong>
-                        {{$comment->body}}
-                    </li>
-
-                @endforeach
-
-            </ul>
+        <div class="body">
+            <p>SKU: {{$product->sku}}</p>
+            <p>Price: R{{$product->price}}</p>
+            <p>Description: {{$product->description}}</p>
+            <p>View Count: {{$product->view_count}}</p>
         </div>
-
-        {{--Add comment--}}
-
-        <hr>
-
-        <div class="card">
-            <div class="card-block">
-
-                <form method="POST" action="/posts/{{$post->id}}/comments">
-
-                    {{--{{method_field('PATCH')}}--}}
-
-                    {{csrf_field()}}
-
-                    <div class="form-group">
-                        <textarea name="body" class="form-control" placeholder="Your comment here." required></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary">Add comment</button>
-                    </div>
-
-                    @include('layouts.errors')
-                </form>
-
-            </div>
+        <div class="btn-group">
+            <a href="{{ url('/admin/edit', $product->id) }}"><button type="button" class="btn btn-primary" style="margin-right:10px;">Edit</button></a>
+            <a href="{{ url('/admin/destroy', $product->id) }}"><button type="button" class="btn btn-primary">Delete</button></a>
         </div>
-
-    </div>
+    </article>
 @endsection

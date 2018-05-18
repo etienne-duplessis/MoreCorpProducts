@@ -19,10 +19,10 @@
                         </form>
                     </li>
                     <li class="nav-item text-nowrap d-sm-block d-md-none">
-                        <a class="nav-link" href="/products">Products List</a>
+                        <a class="nav-link" href="/admin">Products List</a>
                     </li>
                     <li class="nav-item text-nowrap d-sm-block d-md-none">
-                        <a class="nav-link" href="/products/create">Create New Product</a>
+                        <a class="nav-link" href="/admin/create">Create New Product</a>
                     </li>
                 @else
                     <li class="nav-item text-nowrap">

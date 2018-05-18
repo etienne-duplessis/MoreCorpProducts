@@ -57,7 +57,7 @@ class ProductsController extends Controller
 
         session()->flash('message', 'Your product has been published.');
 
-        return redirect('/products');
+        return redirect('/admin');
     }
 
     /**
@@ -68,7 +68,7 @@ class ProductsController extends Controller
      */
     public function show(Product $product)
     {
-        return view('products.show', compact('product'));
+        return view('products.admin.show', compact('product'));
     }
 
     /**
@@ -77,9 +77,9 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Product $product)
     {
-        //
+        return view('products.admin.edit', compact('product'));
     }
 
     /**
@@ -89,9 +89,11 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Product $product, ProductRequest $request)
     {
-        //
+        $product->update($request->all());
+
+        return redirect('admin');
     }
 
     /**
@@ -102,6 +104,7 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        $user->delete();
     }
 }

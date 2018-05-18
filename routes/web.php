@@ -17,11 +17,16 @@
 
 Auth::routes();
 
-Route::get('/admin', 'HomeController@index')->name('home');
-Route::get('/', 'HomeController@index')->name('home');
+//Route::get('/admin', 'HomeController@index')->name('home');
+//Route::get('/', 'HomeController@index')->name('home');
 
-Route::get('/products/create', 'ProductsController@create');
-Route::get('/products/{product}', 'ProductsController@show');
-Route::get('/products', 'ProductsController@index');
-Route::post('/products', 'ProductsController@store');
+Route::get('/admin/create', 'ProductsController@create');
+Route::get('/admin/{product}', 'ProductsController@show');
+Route::get('/admin/edit/{product}', 'ProductsController@edit');
+Route::patch('/admin/update/{product}', 'ProductsController@update');
+Route::patch('/admin/destroy/{product}', 'ProductsController@destroy');
+Route::get('/admin', 'ProductsController@index');
+Route::post('/admin', 'ProductsController@store');
+
+//Route::resource('products', 'ProductsController');
 

@@ -12,6 +12,8 @@
                 <th>SKU</th>
                 <th>PRICE</th>
                 <th>DESCRIPTION</th>
+                <th>VIEW COUNT</th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
@@ -23,6 +25,8 @@
                         <td>{{$product->sku}}</td>
                         <td>{{$product->price}}</td>
                         <td>{{$product->description}}</td>
+                        <td>{{$product->view_count}}</td>
+                        <td><a href="{{ url('/admin', $product->id) }}"><button class="btn">Show</button></a></td>
                     </tr>
 
                 @endforeach

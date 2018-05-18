@@ -28,6 +28,8 @@ class CreateProductsTable extends Migration
             $table->string('sku', 6);
             $table->integer('price');
             $table->string('description', 200);
+
+            $table->integer('view_count')->default(0);
         });
     }
 
