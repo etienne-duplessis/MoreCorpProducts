@@ -37,6 +37,14 @@ require('./bootstrap');
         var url = window.location.pathname;
         // alert(url);
         $('ul.nav a[href="'+ url +'"]').addClass('active');
+
+        /**
+         * Allows the user to confirm before deleting an item
+         */
+
+        $("#deleteButton").on("submit", function(){
+            return confirm("Do you want to delete this item?");
+        });
     }
 
     $(window).ready(scriptConstructor);

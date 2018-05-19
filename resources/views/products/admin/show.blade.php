@@ -13,7 +13,12 @@
         </div>
         <div class="btn-group">
             <a href="{{ url('/admin/edit', $product->id) }}"><button type="button" class="btn btn-primary" style="margin-right:10px;">Edit</button></a>
-            <a href="{{ url('/admin/destroy', $product->id) }}"><button type="button" class="btn btn-primary">Delete</button></a>
+
+            <form id="deleteButton" action="{{action('ProductsController@destroy', $product->id)}}" method="post">
+                @csrf
+                <input name="_method" type="hidden" value="DELETE">
+                <button class="btn btn-danger" type="submit">Delete</button>
+            </form>
         </div>
     </article>
 @endsection

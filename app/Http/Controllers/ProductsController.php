@@ -15,6 +15,7 @@ class ProductsController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('type');
     }
 
     /**
@@ -104,7 +105,11 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::find($id);
-        $user->delete();
+        $product = Product::find($id);
+        $product->delete();
+
+        session()->flash('message', 'Your product has been deleted.');
+
+        return redirect('/admin');
     }
 }

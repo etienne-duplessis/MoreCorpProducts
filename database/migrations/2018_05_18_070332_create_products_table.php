@@ -25,7 +25,7 @@ class CreateProductsTable extends Migration
                 ->onDelete('restrict');
 
             $table->string('name', 100);
-            $table->string('sku', 6);
+            $table->string('sku', 6)->unique();
             $table->integer('price');
             $table->string('description', 200);
 
