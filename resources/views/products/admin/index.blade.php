@@ -26,7 +26,7 @@
                         <td>{{$product->price}}</td>
                         <td>{{$product->description}}</td>
                         <td>{{$product->view_count}}</td>
-                        <td><a href="{{ url('/admin', $product->id) }}"><button class="btn">Show</button></a></td>
+                        <td><a href="{{ url('/admin/products/', $product->id) }}"><button class="btn">Show</button></a></td>
                     </tr>
 
                 @endforeach

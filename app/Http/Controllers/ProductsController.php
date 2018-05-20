@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Bid;
 use App\Http\Requests\ProductRequest;
 use App\Product;
 use Illuminate\Http\Request;
@@ -69,7 +70,24 @@ class ProductsController extends Controller
      */
     public function show(Product $product)
     {
-        return view('products.admin.show', compact('product'));
+        $bids = Bid::where('product_id', $product->id)->orderBy('amount', 'DESC')->get();
+
+        if(count($bids) > 0){
+            //Highest bid
+            $highestBid = $bids[0]->amount;
+
+            //Lowest bid
+            $lowestBid = $bids[count($bids)-1]->amount;
+
+            //Average bid
+            $averageBid = 0;
+            for ($x = 0; $x < count($bids); $x++) {
+                $averageBid = $averageBid + (int)$bids[$x]->amount;
+            }
+            $averageBid = $averageBid / count($bids);
+        }
+
+        return view('products.admin.show', compact('product', 'bids', 'highestBid', 'lowestBid', 'averageBid'));
     }
 
     /**

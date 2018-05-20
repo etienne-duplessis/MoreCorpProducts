@@ -11,10 +11,9 @@
             <p>Description: {{$product->description}}</p>
             <p>View Count: {{$product->view_count}}</p>
 
-            {{$product->bid->amount}}
         </div>
         <div class="btn-group">
-            <a href="{{ url('/admin/edit', $product->id) }}"><button type="button" class="btn btn-primary" style="margin-right:10px;">Edit</button></a>
+            <a href="{{ url('/admin/products/edit', $product->id) }}"><button type="button" class="btn btn-primary" style="margin-right:10px;">Edit</button></a>
 
             <form id="deleteButton" action="{{action('ProductsController@destroy', $product->id)}}" method="post">
                 @csrf
@@ -22,5 +21,28 @@
                 <button class="btn btn-danger" type="submit">Delete</button>
             </form>
         </div>
+    </article>
+
+    <article>
+
+        @unless($bids->isEmpty())
+
+            <h5 class="topMargin">Bids:</h5>
+            <div class="body">
+                <ul class="no-bullet-style">
+                    @foreach($bids as $bid)
+
+                        <li>R{{$bid->amount}}</li>
+
+                    @endforeach
+                </ul>
+
+                <p>Highest bid: R{{$highestBid}}</p>
+                <p>Lowest bid: R{{$lowestBid}}</p>
+                <p>Bid average: R{{$averageBid}}</p>
+            </div>
+
+        @endunless
+
     </article>
 @endsection

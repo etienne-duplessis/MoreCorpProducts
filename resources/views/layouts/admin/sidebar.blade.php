@@ -8,7 +8,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/admin/create">
+                <a class="nav-link" href="/admin/products/create">
                     <i data-feather="file-plus"></i>
                     Create New Product <span class="sr-only">(current)</span>
                 </a>
