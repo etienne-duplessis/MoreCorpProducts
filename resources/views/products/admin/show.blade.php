@@ -10,6 +10,8 @@
             <p>Price: R{{$product->price}}</p>
             <p>Description: {{$product->description}}</p>
             <p>View Count: {{$product->view_count}}</p>
+
+            {{$product->bid->amount}}
         </div>
         <div class="btn-group">
             <a href="{{ url('/admin/edit', $product->id) }}"><button type="button" class="btn btn-primary" style="margin-right:10px;">Edit</button></a>
