@@ -22,7 +22,7 @@ class CreateProductsTable extends Migration
                 ->references('id')
                 ->on('users')
                 ->onUpdate('cascade')
-                ->onDelete('restrict');
+                ->onDelete('cascade');
 
             $table->string('name', 100);
             $table->string('sku', 6)->unique();
