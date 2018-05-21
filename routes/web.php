@@ -18,6 +18,7 @@ Route::post('/admin', 'AdminController@store');
 
 //PUBLIC ROUTES
 
+Route::post('/public/products/create', 'PublicController@create');
 Route::get('/public/products/{product}', 'PublicController@show');
 Route::post('/', 'PublicController@store');
 Route::get('/home', 'PublicController@index')->name('home');
