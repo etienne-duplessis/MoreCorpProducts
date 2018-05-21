@@ -1,6 +1,6 @@
 <div class="fixed-nav fixed-top">
     <nav class="navbar navbar-dark bg-dark flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col-xs-12 col-md-3 col-md-2 mr-0" href="#">@if (Auth::check()){{Auth::user()->name}}@endif</a>
+        <a class="navbar-brand col-xs-12 col-md-3 col-md-2 mr-0" href="{{url('/admin')}}">@if (Auth::check()){{Auth::user()->name}}@endif</a>
         {{--<input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">--}}
         @if (Route::has('login'))
             <ul class="navbar-nav px-3">
@@ -19,10 +19,10 @@
                         </form>
                     </li>
                     <li class="nav-item text-nowrap d-sm-block d-md-none">
-                        <a class="nav-link" href="/admin">Products List</a>
+                        <a class="nav-link" href="{{url('/admin')}}">Products List</a>
                     </li>
                     <li class="nav-item text-nowrap d-sm-block d-md-none">
-                        <a class="nav-link" href="/admin/products/create">Create New Product</a>
+                        <a class="nav-link" href="{{url('/admin/products/create')}}">Create New Product</a>
                     </li>
                 @else
                     <li class="nav-item text-nowrap">

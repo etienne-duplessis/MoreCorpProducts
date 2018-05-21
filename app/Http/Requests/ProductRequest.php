@@ -29,12 +29,28 @@ class ProductRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'name' => 'required|min:2|max:100',
-            'sku' => 'required|min:6|max:6|',//unique:products,sku,'.$this->id,
-            'price' => 'required|integer',
-            'description' => 'required|max:200'
-            //
-        ];
+        switch ($this->method())
+        {
+            case 'POST':
+                return [
+                    'name' => 'required|min:2|max:100',
+                    'sku' => 'required|min:6|max:6|unique:products',
+                    'price' => 'required|integer',
+                    'description' => 'required|max:200'
+                    //
+                ];
+                break;
+
+            case 'PATCH':
+            case 'PUT':
+                return [
+                    'name' => 'required|min:2|max:100',
+                    'sku' => 'required|min:6|max:6|unique:products,sku,' .$this->product->id,
+                    'price' => 'required|integer',
+                    'description' => 'required|max:200'
+                    //
+                ];
+                break;
+        }
     }
 }

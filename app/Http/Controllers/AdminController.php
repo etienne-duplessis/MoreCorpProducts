@@ -15,7 +15,9 @@ class AdminController extends Controller
      */
     public function __construct()
     {
+        //The user must be authenticated
         $this->middleware('auth');
+        //The user must be authenticated and of type 'admin'
         $this->middleware('type');
     }
 
@@ -26,6 +28,7 @@ class AdminController extends Controller
      */
     public function index()
     {
+        //Get all the products
         $products = Product::all();
 
         return view('products.admin.index', compact('products'));
@@ -38,6 +41,7 @@ class AdminController extends Controller
      */
     public function create()
     {
+        //Return to the create view
         return view('products.admin.create');
     }
 
@@ -49,13 +53,15 @@ class AdminController extends Controller
      */
     public function store(ProductRequest $request)
     {
-        //dd($request);
+        //Get all the input data from form
         $inputs = $request->all();
 
-
+        //Use the method on the user model to easily publish using relations
         auth()->user()->publishProduct(
             new Product($inputs)
         );
+
+        //Create the flash message alert
 
         session()->flash('message', 'Your product has been published.');
 
@@ -70,6 +76,7 @@ class AdminController extends Controller
      */
     public function show(Product $product)
     {
+        //Create the bids for display on the page
         $bids = Bid::where('product_id', $product->id)->orderBy('amount', 'DESC')->get();
 
         if(count($bids) > 0){
@@ -98,6 +105,7 @@ class AdminController extends Controller
      */
     public function edit(Product $product)
     {
+        //Return to the edit view
         return view('products.admin.edit', compact('product'));
     }
 
@@ -110,6 +118,7 @@ class AdminController extends Controller
      */
     public function update(Product $product, ProductRequest $request)
     {
+        //Get all form data and update the product
         $product->update($request->all());
 
         return redirect('admin');
@@ -123,6 +132,7 @@ class AdminController extends Controller
      */
     public function destroy($id)
     {
+        //Find relevant product and delete
         $product = Product::find($id);
         $product->delete();
 

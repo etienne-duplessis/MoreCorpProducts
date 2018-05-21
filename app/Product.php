@@ -34,4 +34,14 @@ class Product extends Model
     {
         return $this->hasOne('App\User');
     }
+
+    /**
+     * Custom validation rules
+     *
+     * @return array
+     */
+
+    protected $rules = [
+        'sku' => 'required|unique:products',
+    ];
 }
