@@ -17,7 +17,8 @@
 
 ## Installation Instructions for development environments
 
- * Pull down the repo into a local project directory: https://SkyFez@bitbucket.org/SkyFez/morecorpproducts.git
+ * Pull down the repo into a local project directory: `https://github.com/etienne-duplessis/MoreCorpProducts.git
+`
  * `cd` into the project directory
  * Run `npm install` from the command line to download all the dependencies
  * Run `php artisan serve` to start a local server for development. Open the link in your web browser http://127.0.0.1:8000
