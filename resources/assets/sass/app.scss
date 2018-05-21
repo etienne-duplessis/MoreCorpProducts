@@ -11,9 +11,12 @@
 // Laravel Default
 @import 'laravel-default';
 
-// Admin frontend
+// Admin
 @import "admin-nav";
 @import "admin-content";
+
+// Public
+@import "public-nav";
 
 // Global
 @import "global";

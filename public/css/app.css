@@ -10500,6 +10500,10 @@ body {
   }
 }
 
+body.public .navbar .nav-link {
+  color: white !important;
+}
+
 .topMargin {
   margin-top: 30px;
 }

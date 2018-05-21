@@ -97,6 +97,7 @@ class PublicController extends Controller
 
         $userBid = $bid;
 
+//        dd($userBid);
 
         return view('products.public.show', compact('product', 'bids', 'highestBid', 'lowestBid', 'averageBid', 'userBid'));
 
@@ -110,28 +111,12 @@ class PublicController extends Controller
      */
     public function store(BidRequest $request)
     {
+        //dd('Store');
+
         //Get the form data
         $inputs = $request->all();
 
 //        dd($inputs);
-
-        //GET ALL THE EXISTING BIDS
-        $bids = Bid::where('product_id', $inputs['product_id'])->orderBy('amount', 'DESC')->get();
-
-        if(count($bids) > 0){
-            //Highest bid
-            $highestBid = $bids[0]->amount;
-
-            //Lowest bid
-            $lowestBid = $bids[count($bids)-1]->amount;
-
-            //Average bid
-            $averageBid = 0;
-            for ($x = 0; $x < count($bids); $x++) {
-                $averageBid = $averageBid + (int)$bids[$x]->amount;
-            }
-            $averageBid = $averageBid / count($bids);
-        }
 
         //GET THE PRODUCT
 
@@ -150,7 +135,27 @@ class PublicController extends Controller
         //CHeck if this user hasnt already placed a bid on this product
 
         if($userBid){
-            dd('There is user bid');
+            //dd('There is user bid');
+
+            //GET ALL THE EXISTING BIDS
+            $bids = Bid::where('product_id', $inputs['product_id'])->orderBy('amount', 'DESC')->get();
+
+            //dd($bids);
+
+            if(count($bids) > 0){
+                //Highest bid
+                $highestBid = $bids[0]->amount;
+
+                //Lowest bid
+                $lowestBid = $bids[count($bids)-1]->amount;
+
+                //Average bid
+                $averageBid = 0;
+                for ($x = 0; $x < count($bids); $x++) {
+                    $averageBid = $averageBid + (int)$bids[$x]->amount;
+                }
+                $averageBid = $averageBid / count($bids);
+            }
             session()->flash('message', 'Each user is only allowed to place a single bid per product!');
 
             return view('products.public.show', compact('product', 'bids', 'highestBid', 'lowestBid', 'averageBid', 'userBid'));
@@ -166,6 +171,26 @@ class PublicController extends Controller
 
             $userBid = $bid;
 
+            //GET ALL THE EXISTING BIDS
+            $bids = Bid::where('product_id', $inputs['product_id'])->orderBy('amount', 'DESC')->get();
+
+            //dd($bids);
+
+            if(count($bids) > 0){
+                //Highest bid
+                $highestBid = $bids[0]->amount;
+
+                //Lowest bid
+                $lowestBid = $bids[count($bids)-1]->amount;
+
+                //Average bid
+                $averageBid = 0;
+                for ($x = 0; $x < count($bids); $x++) {
+                    $averageBid = $averageBid + (int)$bids[$x]->amount;
+                }
+                $averageBid = $averageBid / count($bids);
+            }
+
             session()->flash('message', 'Your bid has been placed!');
 
             return view('products.public.show', compact('product', 'bids', 'highestBid', 'lowestBid', 'averageBid', 'userBid'));
@@ -180,6 +205,7 @@ class PublicController extends Controller
      */
     public function show(Product $product)
     {
+        //dd('Show');
         //DISPATCH THE VIEWCOUNT EVENT TO INCREMENT THE PRODUCT VIEW COUNT
         event(new ViewCount($product));
 
@@ -192,6 +218,8 @@ class PublicController extends Controller
 
             //Lowest bid
             $lowestBid = $bids[count($bids)-1]->amount;
+
+            //dd($bids);
 
             //Average bid
             $averageBid = 0;

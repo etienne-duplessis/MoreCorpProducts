@@ -31,7 +31,7 @@ class CreateBidsTable extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
-            $table->string('amount', 20);
+            $table->integer('amount');
         });
     }
 

@@ -34,8 +34,8 @@ require('./bootstrap');
          * Add active classes for bootstrap nav
          */
 
-        var url = "//" + window.location.host + window.location.pathname;
-        //alert(url);
+        var url = window.location.pathname;
+        // alert(url);
         $('ul.nav a[href="'+ url +'"]').addClass('active');
 
         /**
