@@ -31,7 +31,7 @@ class ProductRequest extends FormRequest
     {
         return [
             'name' => 'required|min:2|max:100',
-            'sku' => 'required|min:6|max:6|unique:products',
+            'sku' => 'required|min:6|max:6|',//unique:products,sku,'.$this->id,
             'price' => 'required|integer',
             'description' => 'required|max:200'
             //

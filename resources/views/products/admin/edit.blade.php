@@ -8,7 +8,7 @@
 
         <hr>
 
-        {!! Form::model($product, ['method' => 'PATCH', 'action' => ['ProductsController@update', $product->id]]) !!}
+        {!! Form::model($product, ['method' => 'PATCH', 'action' => ['AdminController@update', $product->id]]) !!}
 
             @include('products.admin.form', ['submitButtonText' => 'Update Product'])
 

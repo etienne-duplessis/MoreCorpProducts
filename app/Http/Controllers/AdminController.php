@@ -7,7 +7,7 @@ use App\Http\Requests\ProductRequest;
 use App\Product;
 use Illuminate\Http\Request;
 
-class ProductsController extends Controller
+class AdminController extends Controller
 {
     /**
      * Create a new articles controller instance.

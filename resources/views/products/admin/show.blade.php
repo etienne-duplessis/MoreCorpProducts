@@ -15,7 +15,7 @@
         <div class="btn-group">
             <a href="{{ url('/admin/products/edit', $product->id) }}"><button type="button" class="btn btn-primary" style="margin-right:10px;">Edit</button></a>
 
-            <form id="deleteButton" action="{{action('ProductsController@destroy', $product->id)}}" method="post">
+            <form id="deleteButton" action="{{action('AdminController@destroy', $product->id)}}" method="post">
                 @csrf
                 <input name="_method" type="hidden" value="DELETE">
                 <button class="btn btn-danger" type="submit">Delete</button>
