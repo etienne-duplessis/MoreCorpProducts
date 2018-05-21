@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Bid;
+use App\Events\ViewCount;
 use App\Http\Requests\BidRequest;
+use App\Listeners\IncrementViewCount;
 use App\Product;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Event;
 
 class PublicController extends Controller
 {
@@ -177,6 +180,9 @@ class PublicController extends Controller
      */
     public function show(Product $product)
     {
+        //DISPATCH THE VIEWCOUNT EVENT TO INCREMENT THE PRODUCT VIEW COUNT
+        event(new ViewCount($product));
+
         //GET ALL THE EXISTING BIDS
         $bids = Bid::where('product_id', $product->id)->orderBy('amount', 'DESC')->get();
 
