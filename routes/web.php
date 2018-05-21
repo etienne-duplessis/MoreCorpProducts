@@ -18,6 +18,8 @@ Route::post('/admin', 'AdminController@store');
 
 //PUBLIC ROUTES
 
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/', 'HomeController@index')->name('home');
+Route::get('/public/products/{product}', 'PublicController@show');
+Route::post('/', 'PublicController@store');
+Route::get('/home', 'PublicController@index')->name('home');
+Route::get('/', 'PublicController@index')->name('home');
 

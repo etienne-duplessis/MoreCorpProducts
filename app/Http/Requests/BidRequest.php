@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 
 class BidRequest extends FormRequest
 {
@@ -13,7 +14,12 @@ class BidRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        if(!Gate::allows('isAdmin') && !Gate::allows('isUser')){
+            return false;
+        }
+        else{
+            return true;
+        }
     }
 
     /**
@@ -24,7 +30,7 @@ class BidRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'amount' => 'required|integer',
         ];
     }
 }
