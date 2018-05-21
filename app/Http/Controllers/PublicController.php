@@ -71,26 +71,10 @@ class PublicController extends Controller
 
         session()->flash('message', 'Your bid has been placed!');
 
-        //GET ALL THE EXISTING BIDS
-        $bids = Bid::where('product_id', $inputs['product_id'])->orderBy('amount', 'DESC')->get();
-
-        if(count($bids) > 0){
-            //Highest bid
-            $highestBid = $bids[0]->amount;
-
-            //Lowest bid
-            $lowestBid = $bids[count($bids)-1]->amount;
-
-            //Average bid
-            $averageBid = 0;
-            for ($x = 0; $x < count($bids); $x++) {
-                $averageBid = $averageBid + (int)$bids[$x]->amount;
-            }
-            $averageBid = $averageBid / count($bids);
-        }
+        //GET ALL THE EXISTING BIDS WITH A LOCAL METHOD - THEN YOU CAN USE THE $allBids array
+        $this->getAllBids($inputs['product_id']);
 
         //GET THE PRODUCT
-
         $product = Product::where('id', $inputs['product_id'])->first();
 
         //GET THE USERS BID
@@ -99,8 +83,13 @@ class PublicController extends Controller
 
 //        dd($userBid);
 
-        return view('products.public.show', compact('product', 'bids', 'highestBid', 'lowestBid', 'averageBid', 'userBid'));
-
+        return view('products.public.show')
+            ->with('product', $product)
+            ->with('bids', $this->allBids['bids'])
+            ->with('highestBid', $this->allBids['highestBid'])
+            ->with('lowestBid', $this->allBids['lowestBid'])
+            ->with('averageBid', $this->allBids['averageBid'])
+            ->with('userBid', $userBid);
     }
 
     /**
@@ -137,28 +126,19 @@ class PublicController extends Controller
         if($userBid){
             //dd('There is user bid');
 
-            //GET ALL THE EXISTING BIDS
-            $bids = Bid::where('product_id', $inputs['product_id'])->orderBy('amount', 'DESC')->get();
+            //GET ALL THE EXISTING BIDS WITH A LOCAL METHOD - THEN YOU CAN USE THE $allBids array
+            $this->getAllBids($inputs['product_id']);
 
-            //dd($bids);
-
-            if(count($bids) > 0){
-                //Highest bid
-                $highestBid = $bids[0]->amount;
-
-                //Lowest bid
-                $lowestBid = $bids[count($bids)-1]->amount;
-
-                //Average bid
-                $averageBid = 0;
-                for ($x = 0; $x < count($bids); $x++) {
-                    $averageBid = $averageBid + (int)$bids[$x]->amount;
-                }
-                $averageBid = $averageBid / count($bids);
-            }
+            //Write flash message
             session()->flash('message', 'Each user is only allowed to place a single bid per product!');
 
-            return view('products.public.show', compact('product', 'bids', 'highestBid', 'lowestBid', 'averageBid', 'userBid'));
+            return view('products.public.show')
+                ->with('product', $product)
+                ->with('bids', $this->allBids['bids'])
+                ->with('highestBid', $this->allBids['highestBid'])
+                ->with('lowestBid', $this->allBids['lowestBid'])
+                ->with('averageBid', $this->allBids['averageBid'])
+                ->with('userBid', $userBid);
         }else{
             //dd('There is not user bid');
             $bid = new Bid();
@@ -171,29 +151,19 @@ class PublicController extends Controller
 
             $userBid = $bid;
 
-            //GET ALL THE EXISTING BIDS
-            $bids = Bid::where('product_id', $inputs['product_id'])->orderBy('amount', 'DESC')->get();
+            //GET ALL THE EXISTING BIDS WITH A LOCAL METHOD - THEN YOU CAN USE THE $allBids array
+            $this->getAllBids($inputs['product_id']);
 
-            //dd($bids);
-
-            if(count($bids) > 0){
-                //Highest bid
-                $highestBid = $bids[0]->amount;
-
-                //Lowest bid
-                $lowestBid = $bids[count($bids)-1]->amount;
-
-                //Average bid
-                $averageBid = 0;
-                for ($x = 0; $x < count($bids); $x++) {
-                    $averageBid = $averageBid + (int)$bids[$x]->amount;
-                }
-                $averageBid = $averageBid / count($bids);
-            }
-
+            //Write flash message
             session()->flash('message', 'Your bid has been placed!');
 
-            return view('products.public.show', compact('product', 'bids', 'highestBid', 'lowestBid', 'averageBid', 'userBid'));
+            return view('products.public.show')
+                ->with('product', $product)
+                ->with('bids', $this->allBids['bids'])
+                ->with('highestBid', $this->allBids['highestBid'])
+                ->with('lowestBid', $this->allBids['lowestBid'])
+                ->with('averageBid', $this->allBids['averageBid'])
+                ->with('userBid', $userBid);
         }
     }
 
@@ -209,25 +179,8 @@ class PublicController extends Controller
         //DISPATCH THE VIEWCOUNT EVENT TO INCREMENT THE PRODUCT VIEW COUNT
         event(new ViewCount($product));
 
-        //GET ALL THE EXISTING BIDS
-        $bids = Bid::where('product_id', $product->id)->orderBy('amount', 'DESC')->get();
-
-        if(count($bids) > 0){
-            //Highest bid
-            $highestBid = $bids[0]->amount;
-
-            //Lowest bid
-            $lowestBid = $bids[count($bids)-1]->amount;
-
-            //dd($bids);
-
-            //Average bid
-            $averageBid = 0;
-            for ($x = 0; $x < count($bids); $x++) {
-                $averageBid = $averageBid + (int)$bids[$x]->amount;
-            }
-            $averageBid = $averageBid / count($bids);
-        }
+        //GET ALL THE EXISTING BIDS WITH A LOCAL METHOD - THEN YOU CAN USE THE $allBids array
+        $this->getAllBids($product->id);
 
         //GET THE USERS BID
 
@@ -238,9 +191,13 @@ class PublicController extends Controller
             $userBid = Bid::where('product_id', $product->id)->where('user_id', Auth::id())->first();
         }
 
-//        dd($userBid);
-
-        return view('products.public.show', compact('product', 'bids', 'highestBid', 'lowestBid', 'averageBid', 'userBid'));
+        return view('products.public.show')
+            ->with('product', $product)
+            ->with('bids', $this->allBids['bids'])
+            ->with('highestBid', $this->allBids['highestBid'])
+            ->with('lowestBid', $this->allBids['lowestBid'])
+            ->with('averageBid', $this->allBids['averageBid'])
+            ->with('userBid', $userBid);
     }
 
     /**
@@ -277,23 +234,47 @@ class PublicController extends Controller
         //
     }
 
-//    public function getAllBids($productId)
-//    {
-//        $this->bids = Bid::where('product_id', $productId)->orderBy('amount', 'DESC')->get();
-//
-//        if(count($this->bids) > 0){
-//            //Highest bid
-//            $this->highestBid = $this->bids[0]->amount;
-//
-//            //Lowest bid
-//            $this->lowestBid = $this->bids[count($this->bids)-1]->amount;
-//
-//            //Average bid
-//            $this->averageBid = 0;
-//            for ($x = 0; $x < count($this->bids); $x++) {
-//                $this->averageBid = $this->averageBid + (int)$this->bids[$x]->amount;
-//            }
-//            $this->averageBid = $this->averageBid / count($this->bids);
-//        }
-//    }
+    /**
+     * Array that holds all the bids
+     */
+
+    public $allBids;
+
+    /**
+     * A central method to get all the cuurrent bids
+     *
+     * @param  int  $productId
+     */
+
+    public function getAllBids($productId)
+    {
+        $this->allBids['bids'] = false;
+        $this->allBids['highestBid'] = false;
+        $this->allBids['lowestBid'] = false;
+        $this->allBids['averageBid'] = false;
+
+        //GET ALL THE EXISTING BIDS
+        $bids = Bid::where('product_id', $productId)->orderBy('amount', 'DESC')->get();
+
+        if(count($bids) > 0){
+            //ALL bids
+            $this->allBids['bids'] = $bids;
+
+            //Highest bid
+            $highestBid = $bids[0]->amount;
+            $this->allBids['highestBid'] = $highestBid;
+
+            //Lowest bid
+            $lowestBid = $bids[count($bids)-1]->amount;
+            $this->allBids['lowestBid'] = $lowestBid;
+
+            //Average bid
+            $averageBid = 0;
+            for ($x = 0; $x < count($bids); $x++) {
+                $averageBid = $averageBid + (int)$bids[$x]->amount;
+            }
+            $averageBid = $averageBid / count($bids);
+            $this->allBids['averageBid'] = $averageBid;
+        }
+    }
 }
