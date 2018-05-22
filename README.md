@@ -17,7 +17,7 @@
 
 ## Installation Instructions for development environments
 
- * Pull down the repo into a local project directory: `https://github.com/etienne-duplessis/MoreCorpProducts.git`
+ * Pull down the repo into a local project directory: `git clone https://github.com/etienne-duplessis/MoreCorpProducts.git DIRECTORYNAME`
  * `cd` into the project directory
  * Run `npm install` from the command line to download all the Laravel frontend dependencies
  * Run `composer install` from the command line to download all the Laravel PHP vendor dependencies
