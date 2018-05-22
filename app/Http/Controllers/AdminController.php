@@ -29,7 +29,7 @@ class AdminController extends Controller
     public function index()
     {
         //Get all the products
-        $products = Product::all();
+        $products = Product::orderBy('updated_at', 'DESC')->get();
 
         return view('products.admin.index', compact('products'));
     }

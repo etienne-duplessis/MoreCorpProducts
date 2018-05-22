@@ -21,7 +21,7 @@ class PublicController extends Controller
      */
     public function index(Request $request)
     {
-        $products = Product::all();
+        $products = Product::orderBy('updated_at', 'DESC')->get();
 
         //Clear the flash messages for the index page
 
