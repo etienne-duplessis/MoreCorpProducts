@@ -20,7 +20,7 @@
  * Pull down the repo into a local project directory: `https://github.com/etienne-duplessis/MoreCorpProducts.git`
  * `cd` into the project directory
  * Run `npm install` from the command line to download all the Laravel frontend dependencies
- * Run `composer install` from the command line to download all the Laravel PHP vendor dependencies dependencies
+ * Run `composer install` from the command line to download all the Laravel PHP vendor dependencies
  * Setup a database (I use xampp). Edit your .env to align with the settings of your newly created database
  * Alternatively, run `cp .env.dev .env`. This will copy the .env.dev file to .env so that you have the same settings as the rest of your team. Be sure to setup your db accordingly.
  * Run `php artisan migrate` to build the db data
