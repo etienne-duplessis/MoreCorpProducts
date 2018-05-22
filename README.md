@@ -24,8 +24,8 @@
  * Setup a database (I use xampp). Edit your .env to align with the settings of your newly created database
  * Alternatively, run `cp .env.dev .env`. This will copy the .env.dev file to .env so that you have the same settings as the rest of your team. Be sure to setup your db accordingly.
  * Run `php artisan migrate` to build the db data
- * If you would like to work on the assets, run `npm run watch` and LaravelMix will automatically compile the assets and refresh the browser for you every time a change is detected
  * Run `php artisan serve` to start a local server for development. Open the link in your web browser `http://127.0.0.1:8000`
+ * If you would like to work on the assets, run `npm run watch` and LaravelMix will automatically compile the assets and refresh the browser for you every time a change is detected
  
  ## Testing instructions - Admin area
  
